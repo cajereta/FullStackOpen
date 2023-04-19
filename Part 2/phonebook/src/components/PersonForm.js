@@ -2,8 +2,8 @@ const PersonForm = ({ newName, newNumber, handleAddName, handleNewNumber, handle
 
 
   return (
-    <form>
-      <div>
+    <form >
+      <div style={{ "display": "flex", "flexDirection": "column", "rowGap": "10px", "maxWidth": "50%", "minWidth": "45%" }}>
         name: <input value={newName} onChange={handleAddName} />
         <br />
         number: <input onKeyPress={(event) => {
@@ -12,7 +12,7 @@ const PersonForm = ({ newName, newNumber, handleAddName, handleNewNumber, handle
           }
         }} value={newNumber} onChange={handleNewNumber} />
       </div>
-      <div>
+      <div style={{ "marginTop": "10px" }}>
         <button onClick={handleAddPerson} type="submit">Add contact!</button>
       </div>
     </form>

@@ -11,6 +11,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
   const [message, setMessage] = useState(null);
+  const [typeMessage, setTypeMessage] = useState("red");
 
 
   useEffect(() => {
@@ -21,7 +22,6 @@ const App = () => {
       });
   }, []);
 
-  let type = "";
   const handleAddPerson = (event) => {
     event.preventDefault();
 
@@ -36,26 +36,36 @@ const App = () => {
       if (!foundName && !foundNumber) {
         const personObject = {
           name,
-          number
+          number,
+
         };
         // Server
         personService
           .create(personObject)
           .then(() => {
             setMessage(`${name} was addded to the list.`);
-            type = "add";
+            setTypeMessage("green");
             setTimeout(() => {
               setMessage(null);
             }, 3000);
-          }
-          );
 
-        setPersons(persons.concat(personObject));
+            setPersons([...persons, personObject]);
+          }
+          )
+          .catch(error => {
+            console.log(error.response.data.error);
+            setTypeMessage("red");
+            setMessage(`Name and number must be at least 3 characters long!`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 3000);
+          });
+
         setNewName("");
         setNewNumber("");
 
       } else if (foundName) {
-        if (window.confirm(`${name} is already addede to the phonebook, replace the old number with a new one?`)) {
+        if (window.confirm(`${name} is already added to the phonebook, replace the old number with a new one?`)) {
           const { id } = persons.find((el) => el.name === name);
           const personObject = {
             name,
@@ -67,7 +77,7 @@ const App = () => {
             .then((response) => {
               setPersons(persons.map(n => n.id !== id ? n : response.data));
               setMessage(`${name} number was updated!`);
-              type = "add";
+              setTypeMessage("green");
               setTimeout(() => {
                 setMessage(null);
               }, 3000);
@@ -99,7 +109,8 @@ const App = () => {
 
 
   const handleDelete = (event) => {
-    const targetId = Number(event.target.id);
+    console.log(event.target);
+    const targetId = event.target.id;
     const { name } = persons.find(({ id }) => id === targetId);
     const deletedPerson = persons.filter(person => person.id !== targetId);
 
@@ -109,13 +120,13 @@ const App = () => {
         .then(() => {
           setPersons([...deletedPerson]);
           setMessage(`${name} was deleted!!`);
-          type = "red";
+          setTypeMessage("red");
           setTimeout(() => {
             setMessage(null);
           }, 3000);
         }).catch(error => {
           setMessage(`There was an error! Please try again`);
-          type = "red";
+          setTypeMessage("red");
           setTimeout(() => {
             setMessage(null);
           }, 3000);
@@ -130,7 +141,7 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
       <Filter filter={filter} handleFilter={handleFilter} />
-      <Notification message={message} type={type} />
+      <Notification message={message} type={typeMessage} />
       <h2>Add a new contact</h2>
 
       <PersonForm
