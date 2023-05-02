@@ -1,0 +1,61 @@
+:root {
+  --color-background: rgb(230, 227, 227);
+  --color-text-dark: rgb(17, 17, 17);
+  --color-green: rgb(79, 116, 93);
+  --color-button-brown: rgb(83, 76, 76);
+  --success: rgb(12, 205, 144);
+  --error: rgb(218, 83, 85);
+  --hover-green: rgb(63, 71, 93);
+  --hover-brown: rgb(67, 62, 62);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, apple color emoji, segoe ui emoji, Segoe UI Symbol, noto color emoji;
+}
+
+
+body {
+  background-color: rgb(230, 227, 227);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.above-header {
+  margin-left: 10vw;
+}
+
+.header-main {
+  display: flex;
+  color: var(--color-background);
+  gap: 20px;
+  padding: 1rem;
+  background-color: var(--color-button-brown);
+  border-radius: 10px;
+  width: 78%;
+  align-self: center;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.header-main button {
+  padding: 0.55rem;
+  align-self: center;
+  text-transform: uppercase;
+  background-color: var(--color-background);
+  border-radius: 10px;
+  border: none;
+  color: var(--color-text-dark);
+  font-weight: bold;
+  letter-spacing: 0.15rem;
+  margin-left: 1rem;
+}
+
+.links {
+  display: flex;
+  color: var(--color-background);
+  gap: 20px;
+}
+
+.links a {
+  color: var(--color-background);
+}

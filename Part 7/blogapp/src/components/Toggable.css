@@ -1,0 +1,15 @@
+.cancel {
+  width: 40%;
+  padding: 0.55rem;
+  align-self: center;
+  text-transform: uppercase;
+  background-color: var(--color-button-brown);
+  border-radius: 10px;
+  border: none;
+  color: var(--color-background);
+  font-weight: bold;
+  margin-top: 1rem;
+  letter-spacing: 0.15rem;
+  margin-left: 29.8vw;
+
+}
